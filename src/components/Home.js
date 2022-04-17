@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import SemesterList from "./SemesterList";
-import Sidebar from "./Sidebar";
+import Sidebar from "./SideBar";
 import "../styles/Sidebar.css";
 const Home = () => {
   return (
