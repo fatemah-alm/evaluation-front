@@ -26,7 +26,7 @@ class AuthStore {
         "🚀 ~ file: authStore.js ~ line 13 ~ AuthStore ~ signup= ~ user",
         user
       );
-      await instance.post("/users/", user, { mode: "cors" });
+      await instance.post("/api/users/", user, { mode: "cors" });
       await this.signin(user, navigate, setIsCorrect);
     } catch (error) {
       setIsCorrect(false);
@@ -37,9 +37,9 @@ class AuthStore {
 
   signin = async (user, navigate, setIsCorrect) => {
     try {
-      const res = await instance.post("/jwt/create/", user);
+      const res = await instance.post("/api/jwt/create/", user);
       this.setUser(res.data.access);
-      const res2 = await instance.get("/users/me/");
+      const res2 = await instance.get("/api/users/me/");
       console.log(res2.data);
       this.user = res2.data;
       await navigate("/home");
@@ -56,7 +56,7 @@ class AuthStore {
       try {
         // console.log(token);
         this.setUser(token);
-        const res2 = await instance.get("/users/me/");
+        const res2 = await instance.get("/api/users/me/");
         this.user = res2.data;
         // console.log(res2.data);
       } catch (error) {
