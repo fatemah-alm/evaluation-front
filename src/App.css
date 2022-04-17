@@ -1,0 +1,106 @@
+.label {
+  margin-bottom: 5px;
+}
+
+.margin1 {
+  margin-top: 10px;
+}
+
+.margin2 {
+  margin-right: 5px;
+}
+
+.logged-in {
+  justify-content: end;
+}
+
+.red {
+  background-color: red;
+  width: 100vw;
+}
+
+.in-correct {
+  color: red;
+}
+
+.logo {
+  font-family: serif;
+  font-weight: 600;
+  width: 50px;
+  margin-left: 15px;
+}
+
+.fonts {
+  font-family: serif;
+  font-weight: 600;
+}
+
+.home {
+  width: 500px;
+}
+
+.card {
+  max-width: 300;
+  height: 200px;
+  margin: 20px;
+  position: absolute;
+  /* border-radius: px; */
+}
+
+.semester-list {
+  display: grid;
+  border-radius: 15px;
+  /* background-color: red; */
+  position: absolute;
+  top: 150px;
+
+  overflow-x: scroll;
+  overflow-y: hidden;
+  table-layout: fixed;
+  width: 100%;
+  grid-template-columns: 200px 200px 200px 200px;
+}
+
+.side {
+  width: 120px;
+  background-color: white;
+  margin-top: 20px;
+  height: 100vh;
+  border-radius: 2px;
+}
+
+.home-page {
+  margin-top: 30px;
+  margin-left: 15px;
+}
+
+.title {
+  top: 70px;
+}
+
+.pos {
+  position: absolute;
+}
+.nav-link {
+  font-family: "Roboto", sans-serif;
+  color: #21252b !important;
+}
+
+.nav-bar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.nav-items {
+  margin-right: 20px;
+}
+
+.btn-text {
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+.list-group {
+  width: 300px;
+}
