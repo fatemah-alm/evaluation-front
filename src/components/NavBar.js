@@ -3,16 +3,18 @@ import "../App.css";
 import { Link } from "react-router-dom";
 import authStore from "../stores/authStore";
 import { observer } from "mobx-react";
+import { FiLogOut } from "react-icons/fi";
+import { GiStarsStack } from "react-icons/gi";
 const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light  fixed-top">
       <div className="nav-bar">
         <Link className="navbar-brand logo" to={"/sign-in"}>
-          <img
+          {/* <img
             src={require("../assets/simple-evaluation-logo-like-review-or-searching-2BWWGYT.jpeg")}
             className="logo"
-          />
-          eValue
+          /> */}
+          Evaluation System
         </Link>
 
         <div
@@ -28,6 +30,8 @@ const NavBar = () => {
                   to={"/sign-in"}
                 >
                   logout
+                  {"   "}
+                  <FiLogOut size={17} />
                 </Link>
               </li>
             ) : (

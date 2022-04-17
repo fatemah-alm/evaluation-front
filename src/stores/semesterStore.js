@@ -16,6 +16,15 @@ class SemesterStore {
       console.log("semesterstore -> fetchsemesters -> error", error);
     }
   };
+
+  createSemester = async (newSemester) => {
+    try {
+      const response = await instance.post("/semesters/", newSemester);
+      this.semesters.push(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 const semesterStore = new SemesterStore();
