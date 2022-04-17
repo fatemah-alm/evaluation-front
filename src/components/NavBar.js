@@ -12,9 +12,8 @@ const NavBar = () => {
             src={require("../assets/simple-evaluation-logo-like-review-or-searching-2BWWGYT.jpeg")}
             className="logo"
           />
-          UValue
+          eValue
         </Link>
-        {authStore.user && <p>Welcome {authStore.user.username}</p>}
 
         <div
           className="collapse navbar-collapse logged-in"
