@@ -4,11 +4,15 @@ function SemesterCard({ semester }) {
   // const handleDelete = () => semesterStore.deleteSemester(Semester._id);
 
   return (
-    <Col className="col-lg-4 mx-auto">
+    <div className="card">
       <Card>
         <Card.Body>
-          <Card.Title>{semester.name}</Card.Title>
-          <Card.Text>{semester.added_by} </Card.Text>
+          <div>
+            <Card.Title>{semester.name}</Card.Title>
+          </div>
+          <div>
+            <Card.Text>{semester.added_by.username} </Card.Text>
+          </div>
           {/* <Card.Text>{semester.description}</Card.Text> */}
           {/* <Button className="m-1" onClick={handleDelete} variant="danger">
               DELETE
@@ -16,7 +20,7 @@ function SemesterCard({ semester }) {
           {/* <SemesterModal oldSemester={Semester} /> */}
         </Card.Body>
       </Card>
-    </Col>
+    </div>
   );
 }
 

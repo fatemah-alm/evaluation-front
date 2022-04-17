@@ -124,3 +124,67 @@ html,
 .home {
   width: 500px;
 }
+
+.card {
+  max-width: 300;
+  height: 200px;
+  margin: 20px;
+  position: absolute;
+  /* border-radius: px; */
+}
+
+.semester-list {
+  display: grid;
+  /* background-color: red; */
+  position: absolute;
+  top: 150px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  table-layout: fixed;
+  width: 100%;
+  grid-template-columns: 200px 200px 200px 200px;
+}
+
+.side {
+  width: 120px;
+  background-color: white;
+  margin-top: 20px;
+  height: 100vh;
+  border-radius: 2px;
+}
+
+.home-page {
+  display: flex;
+  grid-template-columns: 200px 200px 200px;
+  margin-top: 50px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 70px;
+  max-width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.title {
+  position: absolute;
+  top: 70px;
+  font-family: serif;
+}
+
+.nav-link {
+  font-family: "Roboto", sans-serif;
+  color: #21252b !important;
+}
+
+.nav-bar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.nav-items {
+  margin-right: 20px;
+}

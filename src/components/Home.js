@@ -1,13 +1,21 @@
 import React from "react";
 import { observer } from "mobx-react";
-import semesterStore from "../stores/semesterStore";
-import Card from "./SemesterCard";
+import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
+import SemesterList from "./SemesterList";
+import Sidebar from "./Sidebar";
+import "../styles/Sidebar.css";
 const Home = () => {
-  const semesters = semesterStore.semesters.map((semester) => (
-    <Card key={semester._id} semester={semester} />
-  ));
-  console.log(semesters);
-  return <>{semesters}</>;
+  return (
+    <>
+      <Sidebar />
+      <div className="home-page">
+        <div className="title fonts">
+          <h1>Semesters</h1>
+        </div>
+        <SemesterList />
+      </div>
+    </>
+  );
 };
 
 export default observer(Home);
