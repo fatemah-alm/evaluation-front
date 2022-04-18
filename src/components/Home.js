@@ -20,7 +20,7 @@ const Home = () => {
           className="btn .btn-outline-dark btn-block btn-text"
           onClick={handleShow}
         >
-          + add semester
+          + Add Semester
         </button>
       </div>
 
