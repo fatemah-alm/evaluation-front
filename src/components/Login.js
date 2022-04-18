@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { observer } from "mobx-react";
 import { Link, useNavigate } from "react-router-dom";
 import authStore from "../stores/authStore";
-import { observer } from "mobx-react";
 
 const Login = () => {
   const [user, setUser] = useState();

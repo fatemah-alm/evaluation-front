@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 import { Modal, Button, Form } from "react-bootstrap";
-// stores
-import authStore from "../stores/authStore";
-import semesterStore from "../stores/semesterStore";
+import projectStore from "../stores/projectStore";
 
-// code
-const SemesterAddModal = ({ show, handleClose }) => {
-  const [semester, setSemester] = useState({
+//code
+const ProjectAddModal = ({ show, handleClose, semesterId }) => {
+  const [project, setProject] = useState({
     name: "",
-    user: authStore.user.id,
   });
 
   const handleChange = (event) => {
-    setSemester({ ...semester, [event.target.name]: event.target.value });
+    setProject({
+      ...project,
+      [event.target.name]: event.target.value,
+      semester: semesterId,
+    });
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    semesterStore.createSemester(semester);
+    projectStore.addProject(project);
     handleClose();
   };
   return (
@@ -25,11 +26,11 @@ const SemesterAddModal = ({ show, handleClose }) => {
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>semester title</Form.Label>
+            <Form.Label>project name</Form.Label>
             <Form.Control
               name="name"
               onChange={handleChange}
-              placeholder="enter semester title"
+              placeholder="enter project name"
             />
           </Form.Group>
         </Form>
@@ -43,4 +44,4 @@ const SemesterAddModal = ({ show, handleClose }) => {
   );
 };
 
-export default observer(SemesterAddModal);
+export default observer(ProjectAddModal);
