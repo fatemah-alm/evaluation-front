@@ -19,10 +19,7 @@ const Register = () => {
     <div className="auth-inner">
       <form onSubmit={handleSubmit}>
         <h3 className="fonts">Register</h3>
-        {/* <div className="form-group">
-        <label>First name</label>
-        <input type="text" className="form-control" placeholder="First name" />
-      </div> */}
+
         <div className="form-group">
           <label className="label">username</label>
           <input

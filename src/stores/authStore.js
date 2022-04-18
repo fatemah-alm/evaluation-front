@@ -22,10 +22,6 @@ class AuthStore {
 
   signup = async (user, navigate, setIsCorrect) => {
     try {
-      console.log(
-        "🚀 ~ file: authStore.js ~ line 13 ~ AuthStore ~ signup= ~ user",
-        user
-      );
       await instance.post("/api/users/", user, { mode: "cors" });
       await this.signin(user, navigate, setIsCorrect);
     } catch (error) {

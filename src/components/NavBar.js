@@ -1,10 +1,9 @@
 import React from "react";
 import "../App.css";
-import { Link } from "react-router-dom";
-import authStore from "../stores/authStore";
 import { observer } from "mobx-react";
+import { Link } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
-import { GiStarsStack } from "react-icons/gi";
+import authStore from "../stores/authStore";
 const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light  fixed-top">
@@ -48,8 +47,6 @@ const NavBar = () => {
                 </li>
               </>
             )}
-            {/* {authStore.user ? <p>
-                {/* welcome {} */}
           </ul>
         </div>
       </div>

@@ -17,6 +17,15 @@ class SemesterStore {
     }
   };
 
+  fetchSemesterDetails = async (id) => {
+    try {
+      const response = await instance.get(`/semesters/${id}`);
+      this.semesters = response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   createSemester = async (newSemester) => {
     try {
       const response = await instance.post("/semesters/", newSemester);
