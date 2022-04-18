@@ -13,21 +13,29 @@ const Home = () => {
   const scrollContainerStyle = { width: "800px", maxHeight: "400px" };
 
   return (
-    <div className="home-page">
-      <button
-        className="btn .btn-outline-dark btn-block btn-text"
-        onClick={handleShow}
-      >
-        + add semester
-      </button>
-      <MDBContainer>
-        <div
-          className="scrollbar scrollbar-primary  mt-5 mx-auto"
-          style={scrollContainerStyle}
+    <div className="home-page ">
+      <div className="home-page-header">
+        <h3>semesters</h3>
+        <button
+          className="btn .btn-outline-dark btn-block btn-text"
+          onClick={handleShow}
         >
-          <SemesterList />
-        </div>
-      </MDBContainer>
+          + add semester
+        </button>
+      </div>
+
+      <div className="scroll-list">
+        <MDBContainer className="mdb-container">
+          <div
+            className="scrollbar scrollbar-hidden
+            mt-5 mx-auto"
+            style={scrollContainerStyle}
+          >
+            <SemesterList />
+          </div>
+        </MDBContainer>
+      </div>
+
       <SemesterAddModal show={show} handleClose={handleClose} />
     </div>
   );

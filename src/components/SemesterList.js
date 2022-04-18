@@ -17,10 +17,20 @@ const SemesterList = () => {
     <>
       <Accordion.Item eventKey={`${semester.id}`}>
         <Accordion.Header>
-          {semester.name}
-          <AiOutlinePlus onClick={() => handleShow(semester)} />
+          <h6>{semester.name}</h6>
         </Accordion.Header>
         <Accordion.Body>
+          <div className="project-list-header">
+            <h6>Projects</h6>
+            <button
+              className="btn .btn-outline-dark btn-block btn-text"
+              onClick={() => handleShow(semester)}
+            >
+              + add project
+            </button>
+          </div>
+          <hr />
+
           {semester.projects.map((project) => (
             <p>{project}</p>
           ))}

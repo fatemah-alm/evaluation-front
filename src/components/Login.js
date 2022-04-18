@@ -29,7 +29,7 @@ const Login = () => {
           />
         </div>
         <div className="form-group">
-          <label className="label margin1">Password</label>
+          <label className="label ">Password</label>
           <input
             type="password"
             name="password"
@@ -45,7 +45,7 @@ const Login = () => {
           type="submit"
           className="btn .btn-outline-dark btn-block margin1"
         >
-          Submit
+          Login
         </button>
 
         <p className="forgot-password text-right">
