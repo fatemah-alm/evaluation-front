@@ -26,11 +26,19 @@ const TeamAddModal = ({ show, handleClose, projectId }) => {
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>team name</Form.Label>
+            <Form.Label>Team Name</Form.Label>
             <Form.Control
               name="name"
               onChange={handleChange}
               placeholder="enter team name"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Team Members</Form.Label>
+            <Form.Control
+              name="members"
+              onChange={handleChange}
+              placeholder="enter team members"
             />
           </Form.Group>
         </Form>
