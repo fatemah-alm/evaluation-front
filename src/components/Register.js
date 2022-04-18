@@ -55,7 +55,7 @@ const Register = () => {
           type="submit"
           className="btn .btn-outline-dark btn-block margin1"
         >
-          Submit
+          Register
         </button>
         <p className="forgot-password text-right">
           Already registered <Link to="/sign-in">Log in?</Link>

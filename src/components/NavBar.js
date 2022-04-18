@@ -23,15 +23,19 @@ const NavBar = () => {
           <ul className="navbar-nav ml-auto nav-items ">
             {authStore.user ? (
               <li className="nav-item end">
-                <Link
+                <div
+                  style={{
+                    display: "flex",
+                  }}
                   className="nav-link"
-                  onClick={() => authStore.unSetUser()}
-                  to={"/sign-in"}
                 >
-                  logout
-                  {"   "}
-                  <FiLogOut size={17} />
-                </Link>
+                  <p style={{ alignSelf: "center" }}>welcome</p>
+                  <Link onClick={() => authStore.unSetUser()} to={"/sign-in"}>
+                    logout
+                    {"   "}
+                    <FiLogOut size={17} />
+                  </Link>
+                </div>
               </li>
             ) : (
               <>
