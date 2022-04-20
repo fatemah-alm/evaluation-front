@@ -67,7 +67,7 @@ const SemesterList = () => {
     <>
       <Accordion defaultActiveKey="0">{semesters.reverse()}</Accordion>
       <ProjectAddModal show={show} handleClose={handleClose} semesterId={id} />
-      <TeamAddModal show={show1} handleClose={handleClose1} projectId={id1} />
+      <TeamAddModal show={show1} handleClose1={handleClose1} projectId={id1} />
     </>
   );
 };

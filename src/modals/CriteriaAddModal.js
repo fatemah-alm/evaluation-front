@@ -1,44 +1,42 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 import { Modal, Button, Form } from "react-bootstrap";
-import teamStore from "../stores/teamStore";
+// stores
+import criteriaStore from "../stores/criteriaStore";
 
-//code
-const TeamAddModal = ({ show, handleClose1, projectId }) => {
-  const [team, setTeam] = useState({
+// code
+const CriteriaAddModal = ({ show, handleClose }) => {
+  const [criteria, setCriteria] = useState({
     name: "",
+    weight: "",
   });
 
   const handleChange = (event) => {
-    setTeam({
-      ...team,
-      [event.target.name]: event.target.value,
-      project: projectId,
-    });
+    setCriteria({ ...criteria, [event.target.name]: event.target.value });
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    teamStore.addTeam(team);
-    handleClose1();
+    criteriaStore.createCriteria(criteria);
+    handleClose();
   };
   return (
-    <Modal show={show} onHide={handleClose1}>
+    <Modal show={show} onHide={handleClose}>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>Team Name</Form.Label>
+            <Form.Label>Criteria</Form.Label>
             <Form.Control
               name="name"
               onChange={handleChange}
-              placeholder="enter team name"
+              placeholder="enter criteria name"
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Team Members</Form.Label>
+            <Form.Label>Criteria Weight</Form.Label>
             <Form.Control
-              name="members"
+              name="weight"
               onChange={handleChange}
-              placeholder="enter team members"
+              placeholder="enter criteria weight"
             />
           </Form.Group>
         </Form>
@@ -52,4 +50,4 @@ const TeamAddModal = ({ show, handleClose1, projectId }) => {
   );
 };
 
-export default observer(TeamAddModal);
+export default observer(CriteriaAddModal);
