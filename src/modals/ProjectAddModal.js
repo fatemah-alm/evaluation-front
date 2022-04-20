@@ -11,18 +11,21 @@ import {
 import projectStore from "../stores/projectStore";
 import criteriaStore from "../stores/criteriaStore";
 import CriteriaAddModal from "./CriteriaAddModal";
+import { FiCheck } from "react-icons/fi";
 //code
 const ProjectAddModal = ({ show, handleClose, semesterId }) => {
   const [show1, setShow1] = useState(false);
+  const [selection, setSelection] = useState([]);
+  const [isSelected, setIsSelected] = useState(false);
+  const [project, setProject] = useState({
+    name: "",
+    criterias: "",
+  });
+  const key = criteriaStore.criterias.length + 1;
   const handleClose1 = () => setShow1(false);
   const handleShow = () => {
     setShow1(true);
   };
-  const [project, setProject] = useState({
-    name: "",
-    criterias: [],
-  });
-  const key = criteriaStore.criterias.length + 1;
 
   const handleChange = (event) => {
     setProject({
@@ -31,13 +34,16 @@ const ProjectAddModal = ({ show, handleClose, semesterId }) => {
       semester: semesterId,
     });
   };
-  const handleSelect = (criteria) => {
-    setProject({ ...project, criterias: [criteria.id] });
-    console.log(project, "!!!");
-    console.log(project.criterias, "$$$$");
+  const handleSelect = async (criteria) => {
+    setIsSelected(!criteria.isSelected);
+    await criteriaStore.selectCriteria(criteria.id, isSelected);
+    setSelection([...selection, criteria.id]);
   };
 
   const handleSubmit = (event) => {
+    project.criterias = selection;
+    console.log(project.criterias, "criteriaas");
+    setProject(project);
     event.preventDefault();
     console.log(project, "CHECK");
     projectStore.addProject(project);
@@ -77,7 +83,22 @@ const ProjectAddModal = ({ show, handleClose, semesterId }) => {
                   eventKey={`${criteria.id}`}
                   onClick={() => handleSelect(criteria)}
                 >
-                  {criteria.name} - {criteria.weight}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      margin: -4,
+                    }}
+                  >
+                    <p style={{ fontSize: 15 }}>
+                      {criteria.name} - {criteria.weight}
+                    </p>
+                    {criteria.isSelected ? (
+                      <FiCheck style={{ color: "blue" }} />
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </Dropdown.Item>
               ))}
               <Dropdown.Divider />

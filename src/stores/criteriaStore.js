@@ -25,6 +25,28 @@ class CriteriaStore {
       console.log(error);
     }
   };
+
+  selectCriteria = async (criteriaId, nextSelcted) => {
+    try {
+      const foundCriteria = this.criterias.find(
+        (criteria) => JSON.stringify(criteria.id) === JSON.stringify(criteriaId)
+      );
+      foundCriteria.isSelected = nextSelcted;
+
+      await this.updateCriteria(criteriaId, foundCriteria);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  updateCriteria = async (criteriaId, newCriteria) => {
+    try {
+      await instance.put(`/criterias/${criteriaId}`, newCriteria);
+      await this.fetchCriterias();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 const criteriaStore = new CriteriaStore();
