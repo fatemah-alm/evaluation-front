@@ -46,8 +46,7 @@ const SemesterList = () => {
               <div className="project-item">
                 <div className="project-team-list">
                   <Link
-                    onClick={() => projectStore.projectDetail(project.id)}
-                    to={"/report"}
+                    to={`/projects/${project.id}`}
                     style={{ color: "#323539" }}
                   >
                     <h6>{project.name}: </h6>

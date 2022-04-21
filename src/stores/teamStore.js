@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { instance } from "./instance";
 import semesterStore from "./semesterStore";
+import projectStore from "./projectStore";
 class TeamStore {
   teams = [];
 
@@ -22,6 +23,8 @@ class TeamStore {
       const response = await instance.post("/teams/", newTeam);
       this.teams.push(response.data);
       await semesterStore.fetchSemesters();
+      await projectStore.fetchProjects();
+      this.fetchTeams();
     } catch (error) {
       console.log(error);
     }
