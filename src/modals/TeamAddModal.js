@@ -16,7 +16,12 @@ const TeamAddModal = ({ show, handleClose1, projectId }) => {
       project: projectId,
     });
   };
+
   const handleSubmit = (event) => {
+    // team.members = team.members
+    //   .replace(/\s/g, "")
+    //   .split(",")
+    //   .filter((name) => name !== "");
     event.preventDefault();
     teamStore.addTeam(team);
     handleClose1();

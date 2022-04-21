@@ -1,22 +1,16 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-import {
-  Modal,
-  Button,
-  Form,
-  Dropdown,
-  DropdownButton,
-  ButtonGroup,
-} from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
 import projectStore from "../stores/projectStore";
 import criteriaStore from "../stores/criteriaStore";
 import CriteriaAddModal from "./CriteriaAddModal";
-import { FiCheck } from "react-icons/fi";
+import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
+import { IoIosAddCircleOutline } from "react-icons/io";
+
 //code
 const ProjectAddModal = ({ show, handleClose, semesterId }) => {
   const [show1, setShow1] = useState(false);
-  const [selection, setSelection] = useState([]);
-  const [isSelected, setIsSelected] = useState(false);
+
   const [project, setProject] = useState({
     name: "",
     criterias: "",
@@ -34,18 +28,12 @@ const ProjectAddModal = ({ show, handleClose, semesterId }) => {
       semester: semesterId,
     });
   };
-  const handleSelect = async (criteria) => {
-    setIsSelected(!criteria.isSelected);
-    await criteriaStore.selectCriteria(criteria.id, isSelected);
-    setSelection([...selection, criteria.id]);
+  const handleSelect = (selected) => {
+    setProject({ ...project, criterias: selected });
   };
 
   const handleSubmit = (event) => {
-    project.criterias = selection;
-    console.log(project.criterias, "criteriaas");
-    setProject(project);
     event.preventDefault();
-    console.log(project, "CHECK");
     projectStore.addProject(project);
     handleClose();
   };
@@ -70,42 +58,28 @@ const ProjectAddModal = ({ show, handleClose, semesterId }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <DropdownButton
-              as={ButtonGroup}
-              key={"end"}
-              id={`dropdown-button-drop-end`}
-              drop="end"
-              variant="light"
-              title="Criteria"
+            <Form.Label>Criteria</Form.Label>
+            <div
+              style={{ width: "100%", display: "flex", alignItems: "center" }}
             >
-              {criteriaStore.criterias.map((criteria) => (
-                <Dropdown.Item
-                  eventKey={`${criteria.id}`}
-                  onClick={() => handleSelect(criteria)}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      margin: -4,
-                    }}
-                  >
-                    <p style={{ fontSize: 15 }}>
-                      {criteria.name} - {criteria.weight}
-                    </p>
-                    {criteria.isSelected ? (
-                      <FiCheck style={{ color: "blue" }} />
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </Dropdown.Item>
-              ))}
-              <Dropdown.Divider />
-              <Dropdown.Item eventKey={`${key}`} onClick={handleShow}>
-                +Add{" "}
-              </Dropdown.Item>
-            </DropdownButton>
+              <div style={{ width: "60%" }}>
+                <DropdownMultiselect
+                  options={criteriaStore.criterias.map((criteria) => {
+                    return {
+                      key: criteria.id,
+                      label: criteria.name + " - " + criteria.weight,
+                    };
+                  })}
+                  name="Criteria"
+                  handleOnChange={handleSelect}
+                />
+              </div>
+              <IoIosAddCircleOutline
+                style={{ marginLeft: "7px" }}
+                onClick={handleShow}
+                size={24}
+              />
+            </div>
           </Form.Group>
         </Form>
       </Modal.Body>
