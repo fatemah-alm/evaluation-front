@@ -28,6 +28,16 @@ class ProjectStore {
       console.log(error);
     }
   };
+
+  projectDetail = async (projectId) => {
+    try {
+      const response = await instance.get(`/projects/${projectId}`);
+      this.projects.push(response.data);
+      await this.fetchProjects();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 const projectStore = new ProjectStore();

@@ -4,6 +4,8 @@ import semesterStore from "../stores/semesterStore";
 import { Accordion } from "react-bootstrap";
 import ProjectAddModal from "../modals/ProjectAddModal";
 import TeamAddModal from "../modals/TeamAddModal";
+import { Link } from "react-router-dom";
+import projectStore from "../stores/projectStore";
 const SemesterList = () => {
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
@@ -39,33 +41,58 @@ const SemesterList = () => {
           </div>
           <hr />
 
-          {semester.project_set.map((project) => (
-            <div className="project-item">
-              <div className="project-team-list">
-                <h6>{project.name}: </h6>
-                {project.teams.map((team) => (
-                  <p className="margin23">{team.name}</p>
-                ))}
+          {semester.project_set.length !== 0 ? (
+            semester.project_set.map((project) => (
+              <div className="project-item">
+                <div className="project-team-list">
+                  <Link
+                    onClick={() => projectStore.projectDetail(project.id)}
+                    to={"/report"}
+                    style={{ color: "#323539" }}
+                  >
+                    <h6>{project.name}: </h6>
+                  </Link>
+                  {project.teams.map((team) => (
+                    <p className="margin23">{team.name}</p>
+                  ))}
+                </div>
+                <div>
+                  <button
+                    className="btn .btn-outline-dark btn-block btn-text"
+                    onClick={() => handleShow1(project)}
+                  >
+                    + Add Team
+                  </button>
+                </div>
               </div>
-              <div>
-                <button
-                  className="btn .btn-outline-dark btn-block btn-text"
-                  onClick={() => handleShow1(project)}
-                >
-                  + Add Team
-                </button>
-              </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p>No projects yet!</p>
+          )}
         </Accordion.Body>
       </Accordion.Item>
     </>
   ));
 
-  console.log(semesters);
+  console.log(semesters, ".>>>");
   return (
     <>
-      <Accordion defaultActiveKey="0">{semesters.reverse()}</Accordion>
+      <Accordion defaultActiveKey="0">
+        {semesters.length !== 0 ? (
+          semesters.reverse()
+        ) : (
+          <div
+            style={{
+              alignItems: "center",
+              width: "100%",
+              justifyContent: "center",
+              display: "flex",
+            }}
+          >
+            <p>Nothing to see here yet!</p>
+          </div>
+        )}
+      </Accordion>
       <ProjectAddModal show={show} handleClose={handleClose} semesterId={id} />
       <TeamAddModal show={show1} handleClose1={handleClose1} projectId={id1} />
     </>

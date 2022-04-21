@@ -21,6 +21,7 @@ class CriteriaStore {
     try {
       const response = await instance.post("/criterias/", newCriteria);
       this.criterias.push(response.data);
+      await this.fetchCriterias();
     } catch (error) {
       console.log(error);
     }
@@ -32,8 +33,6 @@ class CriteriaStore {
         (criteria) => JSON.stringify(criteria.id) === JSON.stringify(criteriaId)
       );
       foundCriteria.isSelected = nextSelcted;
-
-      await this.updateCriteria(criteriaId, foundCriteria);
     } catch (error) {
       console.log(error);
     }

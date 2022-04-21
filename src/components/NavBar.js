@@ -9,10 +9,6 @@ const NavBar = () => {
     <nav className="navbar navbar-expand-lg navbar-light  fixed-top">
       <div className="nav-bar">
         <Link className="navbar-brand logo" to={"/sign-in"}>
-          {/* <img
-            src={require("../assets/simple-evaluation-logo-like-review-or-searching-2BWWGYT.jpeg")}
-            className="logo"
-          /> */}
           Evaluation System
         </Link>
 
@@ -23,19 +19,15 @@ const NavBar = () => {
           <ul className="navbar-nav ml-auto nav-items ">
             {authStore.user ? (
               <li className="nav-item end">
-                <div
-                  style={{
-                    display: "flex",
-                  }}
+                <Link
                   className="nav-link"
+                  onClick={() => authStore.unSetUser()}
+                  to={"/sign-in"}
                 >
-                  <p style={{ alignSelf: "center" }}>welcome</p>
-                  <Link onClick={() => authStore.unSetUser()} to={"/sign-in"}>
-                    logout
-                    {"   "}
-                    <FiLogOut size={17} />
-                  </Link>
-                </div>
+                  logout
+                  {"   "}
+                  <FiLogOut size={17} />
+                </Link>
               </li>
             ) : (
               <>
