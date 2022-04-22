@@ -5,7 +5,6 @@ import { Accordion } from "react-bootstrap";
 import ProjectAddModal from "../modals/ProjectAddModal";
 import TeamAddModal from "../modals/TeamAddModal";
 import { Link } from "react-router-dom";
-import projectStore from "../stores/projectStore";
 const SemesterList = () => {
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
@@ -40,12 +39,12 @@ const SemesterList = () => {
             </button>
           </div>
           <hr />
-
           {semester.project_set.length !== 0 ? (
             semester.project_set.map((project) => (
               <div className="project-item">
                 <div className="project-team-list">
                   <Link
+                    key={project.id}
                     to={`/projects/${project.id}`}
                     style={{ color: "#323539" }}
                   >

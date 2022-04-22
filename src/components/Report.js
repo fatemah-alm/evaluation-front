@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { observer } from "mobx-react";
 import projectStore from "../stores/projectStore";
 import semesterStore from "../stores/semesterStore";
@@ -8,13 +8,11 @@ import { BiFilterAlt } from "react-icons/bi";
 const Report = () => {
   const { projectId } = useParams();
   const project = projectStore.projects.find((project) => {
-    console.log(project.id, "first");
-    return project.id == projectId;
-  });
-
+    return +project.id === +projectId;
+  }) ?? { name: "", teams: [], semester: "" };
   const semester = semesterStore.semesters.find(
-    (semester) => semester.id == project.semester
-  );
+    (semester) => semester.id === +project.semester
+  ) ?? { name: "" };
   return (
     <div className="home-page report-page">
       <div className="report-page-header">
@@ -37,7 +35,12 @@ const Report = () => {
       <p style={{ textAlign: "center", color: "#54575b" }}>
         this project has been graded by 2 judges
       </p>
-      <ReportTable />
+      <div className="report">
+        <ReportTable />
+      </div>
+      <div className="total">
+        <h5>Total: 99%</h5>
+      </div>
     </div>
   );
 };

@@ -202,6 +202,13 @@
   margin-top: 15px;
   text-align: center;
 }
+.report {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  /* background-color: red; */
+}
 
 .teams-list {
   display: flex;
@@ -212,4 +219,12 @@
 
 .team-item {
   margin-left: 15px;
+}
+
+.total {
+  width: 80%;
+  margin-left: 80px;
+  text-decoration: underline;
+  justify-content: end;
+  text-align: end;
 }
