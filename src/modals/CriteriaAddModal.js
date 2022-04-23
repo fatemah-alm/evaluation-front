@@ -10,7 +10,6 @@ const CriteriaAddModal = ({ show, handleClose }) => {
     name: "",
     weight: "",
   });
-
   const handleChange = (event) => {
     setCriteria({ ...criteria, [event.target.name]: event.target.value });
   };

@@ -195,7 +195,22 @@
 .report-page {
   width: 60%;
 }
-
+.icons {
+  justify-content: end;
+  text-align: end;
+  width: 80%;
+  margin-left: 150px;
+  margin-top: 7px;
+  display: flex;
+  margin-bottom: -40px;
+}
+.icon {
+  margin-right: 5px;
+}
+.icon-item {
+  flex-direction: column;
+  margin-right: 10px;
+}
 .report-page-header {
   width: 100%;
   flex-direction: column;
@@ -227,4 +242,60 @@
   text-decoration: underline;
   justify-content: end;
   text-align: end;
+}
+
+.modal-title {
+  text-align: center;
+}
+
+.share-link {
+  display: flex;
+  align-items: center;
+}
+
+.input-judge {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.input-field {
+  width: 300px;
+  margin-left: 5px;
+}
+.btn-judge {
+  margin-top: 5px;
+  width: 75%;
+  text-align: end;
+  margin-left: 73px;
+}
+
+.judge-page {
+  width: 500px;
+  height: 300px;
+}
+
+.judge-page-header {
+  width: 100%;
+  flex-direction: column;
+  margin-top: 45px;
+  text-align: center;
+}
+
+.judge-name {
+  margin-top: 25px;
+  width: 80%;
+  margin-left: 80px;
+}
+
+.teams-page {
+  width: 95%;
+  margin-left: 20px;
+}
+
+.criterion {
+  display: flex;
+}
+.slider {
+  width: 70%;
+  margin-left: 30px;
 }
