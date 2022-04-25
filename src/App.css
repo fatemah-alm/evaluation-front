@@ -298,4 +298,30 @@
 .slider {
   width: 70%;
   margin-left: 30px;
+  display: flex;
+  font-size: small;
+  align-items: center;
+}
+
+.btn-done {
+  margin-top: 10px;
+  display: flex;
+  justify-content: end;
+}
+
+.thank-you {
+  margin-top: 140px;
+  display: flex;
+  justify-content: center;
+}
+
+.icon-locked {
+  margin-right: 15px;
+}
+
+.locked {
+  margin-top: 25px;
+  color: red;
+  display: flex;
+  justify-content: center;
 }

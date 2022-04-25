@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { observer } from "mobx-react";
 import projectStore from "../stores/projectStore";
 import semesterStore from "../stores/semesterStore";
+import evaluationStore from "../stores/evaluationStore";
 import ReportTable from "./ReportTable";
 import { BiFilterAlt } from "react-icons/bi";
 import { HiShare } from "react-icons/hi";
@@ -11,8 +12,12 @@ import ShareModal from "../modals/ShareModal";
 const Report = () => {
   const { projectId } = useParams();
   const [show, setShow] = useState(false);
+  const [evaluation, setEvaluation] = useState({ project: projectId });
   const handleClose = () => setShow(false);
-  const handleShow = () => {
+  const handleShow = async () => {
+    const eva = await evaluationStore.createEvaluation(evaluation);
+    setEvaluation(eva);
+    console.log(evaluation);
     setShow(true);
   };
   const project = projectStore.projects.find((project) => {
@@ -21,17 +26,31 @@ const Report = () => {
   const semester = semesterStore.semesters.find(
     (semester) => semester.id === +project.semester
   ) ?? { name: "" };
+
+  const handlelocked = () => {
+    project.isLocked = true;
+    projectStore.updateProject(projectId, project);
+  };
   return (
     <div className="home-page report-page">
       <div className="icons">
-        <div className="icon-item" onClick={handleShow}>
-          <HiShare size={26} className="icon" />
-          <p>Share</p>
-        </div>
-        <div className="icon-item">
-          <IoIosLock size={26} className="icon" />
-          <p>Lock</p>
-        </div>
+        {project.isLocked ? (
+          <div className="icon-item">
+            <IoIosLock size={28} className="icon-locked" />
+            <p>Locked!</p>
+          </div>
+        ) : (
+          <>
+            <div className="icon-item" onClick={handleShow}>
+              <HiShare size={26} className="icon" />
+              <p>Share</p>
+            </div>
+            <div className="icon-item">
+              <IoIosLock size={26} className="icon" onClick={handlelocked} />
+              <p>Lock</p>
+            </div>
+          </>
+        )}
       </div>
       <div className="report-page-header">
         <h2>{project.name}</h2>
@@ -59,7 +78,12 @@ const Report = () => {
       <div className="total">
         <h5>Total: 99%</h5>
       </div>
-      <ShareModal show={show} handleClose={handleClose} projectId={projectId} />
+      <ShareModal
+        show={show}
+        handleClose={handleClose}
+        projectId={projectId}
+        evaluation={evaluation}
+      />
     </div>
   );
 };

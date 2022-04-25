@@ -17,14 +17,14 @@ class JudgeStore {
     }
   };
 
-  //   fetchSemesterDetails = async (id) => {
-  //     try {
-  //       const response = await instance.get(`/semesters/${id}`);
-  //       this.semesters = response.data;
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+  updateJudge = async (judgeId, newJudge) => {
+    try {
+      await instance.put(`/judges/${judgeId}`, newJudge);
+      await this.fetchJudges();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   createJudge = async (newJudge) => {
     try {
