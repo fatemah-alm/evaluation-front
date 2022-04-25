@@ -21,8 +21,14 @@ function App() {
           <Route path="/sign-up" element={<Register />} />
           <Route path="/home" element={<Home />} />
           <Route path="/projects/:projectId" element={<Report />} />
-          <Route path="/projects/:projectId/x" element={<JudgeScreen />} />
-          <Route path="/teams/:projectId/:judgeId" element={<TeamsPage />} />
+          <Route
+            path="/projects/:projectId/:evaluationId/x"
+            element={<JudgeScreen />}
+          />
+          <Route
+            path="/teams/:projectId/:evaluationId/:judgeId"
+            element={<TeamsPage />}
+          />
         </Routes>
       </div>
     </div>

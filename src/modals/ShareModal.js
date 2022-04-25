@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // code
-const ShareModal = ({ show, handleClose, projectId }) => {
+const ShareModal = ({ show, handleClose, projectId, evaluation }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     handleClose();
@@ -29,7 +29,7 @@ const ShareModal = ({ show, handleClose, projectId }) => {
               />
               <Form.Control
                 name="name"
-                value={`localhost:3000/projects/${projectId}/x`}
+                defaultValue={`localhost:3000/projects/${projectId}/${evaluation.id}/x`}
                 style={{
                   marginRight: "10px",
                   width: "70%",
@@ -38,7 +38,9 @@ const ShareModal = ({ show, handleClose, projectId }) => {
               <Button
                 variant="light"
                 onClick={() => {
-                  copy(`localhost:3000/projects/${projectId}/x`);
+                  copy(
+                    `localhost:3000/projects/${projectId}/${evaluation.id}/x`
+                  );
                   toast("Copied to clipboard!");
                 }}
               >

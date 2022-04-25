@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import { observer } from "mobx-react";
 import projectStore from "../stores/projectStore";
 import semesterStore from "../stores/semesterStore";
 import judgeStore from "../stores/judgeStore";
 import { Accordion } from "react-bootstrap";
 import { Slider } from "@mui/material";
-
+import { AiOutlineFileDone } from "react-icons/ai";
 const TeamsPage = () => {
-  const { projectId, judgeId } = useParams();
+  const { projectId, evaluationId, judgeId } = useParams();
+  const [done, setDone] = useState(false);
   const project = projectStore.projects.find((project) => {
     return +project.id === +projectId;
   }) ?? { name: "", teams: [], semester: "" };
@@ -18,53 +20,87 @@ const TeamsPage = () => {
   const judge = judgeStore.judges.find((judge) => {
     return +judge.id === +judgeId;
   }) ?? { name: "", project: "" };
+  const handleChange = (event, criteria, grade) => {
+    criteria.grade = event.target.value;
+    console.log(criteria.grade, "THIS");
+    grade.grade.map((criteria1) => {
+      if (+criteria1.id === +criteria.id)
+        return (criteria1.grade = event.target.value);
+    });
+    judge.grade.map((team) => {
+      if (+team.id === +grade.id) return (team = grade);
+    });
+  };
+
+  const handleSubmit = () => {
+    judgeStore.updateJudge(judgeId, judge);
+    setDone(true);
+  };
   return (
     <div className="home-page report-page">
-      {" "}
       <div className="report-page-header">
         <h2>{project.name}</h2>
         <h6 style={{ color: "#54575b" }}>{semester.name}</h6>
       </div>
-      <div className="report-page-header judge-name">
-        <h5>hello {judge.name},</h5>
-        <p>
-          Please watch the presentaions of the following teams carefully, and
-          judge them according to the criteria below
-        </p>
-      </div>
-      <div className="teams-page">
-        <h5>Teams</h5>
-        <Accordion defaultActiveKey="0">
-          {project.teams.map((team) => (
-            <>
-              <Accordion.Item eventKey={`${team.id}`}>
-                <Accordion.Header>
-                  <h6>{team.name}</h6>
-                </Accordion.Header>
-                <Accordion.Body>
-                  {project.criterias.map((criteria) => (
-                    <div className="criterion">
-                      <p>{criteria.name}</p>
-                      <div className="slider">
-                        <Slider
-                          aria-label="Temperature"
-                          defaultValue={30}
-                          // getAriaValueText={valuetext}
-                          valueLabelDisplay="auto"
-                          step={10}
-                          marks
-                          min={10}
-                          max={110}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </Accordion.Body>
-              </Accordion.Item>
-            </>
-          ))}
-        </Accordion>
-      </div>
+      {done ? (
+        <div className="thank-you">
+          <h2>Thank You!</h2>
+          <AiOutlineFileDone size={40} />
+        </div>
+      ) : (
+        <>
+          <div className="report-page-header judge-name">
+            <h5>hello {judge.name},</h5>
+            <p>
+              Please watch the presentaions of the following teams carefully,
+              and judge them according to the criteria below
+            </p>
+          </div>
+          <div className="teams-page">
+            <h5>Teams</h5>
+            <Accordion defaultActiveKey="0">
+              {judge.grade.map((grade) => (
+                <>
+                  <Accordion.Item eventKey={`${grade.id}`}>
+                    <Accordion.Header>
+                      <h6>{grade.name}</h6>
+                    </Accordion.Header>
+                    <Accordion.Body>
+                      {grade.grade.map((criteria) => (
+                        <div className="criterion">
+                          <p>{criteria.name}</p>
+                          <div className="slider">
+                            <p>0</p>
+                            <Slider
+                              aria-label="Temperature"
+                              defaultValue={0}
+                              //   getAriaValueText={valuetext}
+                              valueLabelDisplay="auto"
+                              onChange={(event) =>
+                                handleChange(event, criteria, grade)
+                              }
+                              step={10}
+                              marks
+                              min={0}
+                              max={100}
+                            />
+                            <p>10</p>
+                          </div>
+                        </div>
+                      ))}
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </>
+              ))}
+            </Accordion>
+            <div className="btn-done">
+              <Button variant="light" onClick={handleSubmit}>
+                Done
+              </Button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

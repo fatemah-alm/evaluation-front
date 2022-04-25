@@ -29,6 +29,15 @@ class ProjectStore {
     }
   };
 
+  updateProject = async (projectId, newProject) => {
+    try {
+      await instance.put(`/projects/${projectId}`, newProject);
+      await this.fetchProjects();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   projectDetail = async (projectId) => {
     try {
       const response = await instance.get(`/projects/${projectId}`);
