@@ -24,7 +24,7 @@ const SemesterList = () => {
 
   const semesters = semesterStore.semesters.map((semester) => (
     <>
-      <Accordion.Item eventKey={`${semester.id}`}>
+      <Accordion.Item eventKey={`${semester.id}`} key={semester.id}>
         <Accordion.Header>
           <h6>{semester.name}</h6>
         </Accordion.Header>
@@ -41,7 +41,7 @@ const SemesterList = () => {
           <hr />
           {semester.project_set.length !== 0 ? (
             semester.project_set.map((project) => (
-              <div className="project-item">
+              <div className="project-item" key={project.id}>
                 <div className="project-team-list">
                   <Link
                     key={project.id}
@@ -51,7 +51,9 @@ const SemesterList = () => {
                     <h6>{project.name}: </h6>
                   </Link>
                   {project.teams.map((team) => (
-                    <p className="margin23">{team.name}</p>
+                    <p className="margin23" key={team.id}>
+                      {team.name}
+                    </p>
                   ))}
                 </div>
                 <div>

@@ -13,6 +13,7 @@ const Report = () => {
   const { projectId } = useParams();
   const [show, setShow] = useState(false);
   const [evaluation, setEvaluation] = useState({ project: projectId });
+  const [teamId, setTeamId] = useState(0);
   const handleClose = () => setShow(false);
   const handleShow = async () => {
     const eva = await evaluationStore.createEvaluation(evaluation);
@@ -27,6 +28,9 @@ const Report = () => {
     (semester) => semester.id === +project.semester
   ) ?? { name: "" };
 
+  const handleTeam = (teamID) => {
+    setTeamId(teamID);
+  };
   const handlelocked = () => {
     project.isLocked = true;
     projectStore.updateProject(projectId, project);
@@ -64,16 +68,16 @@ const Report = () => {
         </div>
         {project.teams.map((team) => (
           <div className="team-item">
-            <p>{team.name}</p>
+            <p onClick={() => handleTeam(team.id)}>{team.name}</p>
             <hr />
           </div>
         ))}
       </div>
       <p style={{ textAlign: "center", color: "#54575b" }}>
-        this project has been graded by 2 judges
+        this project has been graded by {project.judge.length} judges
       </p>
       <div className="report">
-        <ReportTable />
+        <ReportTable project={project} teamId={teamId} />
       </div>
       <div className="total">
         <h5>Total: 99%</h5>

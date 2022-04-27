@@ -79,10 +79,10 @@ const TeamsPage = () => {
                               onChange={(event) =>
                                 handleChange(event, criteria, grade)
                               }
-                              step={10}
+                              step={0.5}
                               marks
                               min={0}
-                              max={100}
+                              max={10}
                             />
                             <p>10</p>
                           </div>
