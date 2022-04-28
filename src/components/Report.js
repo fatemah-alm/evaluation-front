@@ -63,25 +63,30 @@ const Report = () => {
       <div className="teams-list">
         <BiFilterAlt size={26} color="#54575b" />
         <div className="team-item">
-          <p>All</p>
+          <p onClick={() => handleTeam(0)} style={{ cursor: "pointer" }}>
+            All
+          </p>
           <hr />
         </div>
         {project.teams.map((team) => (
-          <div className="team-item">
-            <p onClick={() => handleTeam(team.id)}>{team.name}</p>
+          <div key={team.id} className="team-item">
+            <p
+              onClick={() => handleTeam(team.id)}
+              style={{ cursor: "pointer" }}
+            >
+              {team.name}
+            </p>
             <hr />
           </div>
         ))}
       </div>
       <p style={{ textAlign: "center", color: "#54575b" }}>
-        this project has been graded by {project.judge.length} judges
+        this project has been graded by{" "}
+        {project.judge ? project.judge.length : "0"} judges
       </p>
-      <div className="report">
-        <ReportTable project={project} teamId={teamId} />
-      </div>
-      <div className="total">
-        <h5>Total: 99%</h5>
-      </div>
+
+      <ReportTable project={project} teamId={teamId} />
+
       <ShareModal
         show={show}
         handleClose={handleClose}

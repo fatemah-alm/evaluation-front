@@ -46,13 +46,13 @@ const TeamAddModal = ({ show, handleClose1, projectId }) => {
               placeholder="enter team members"
             />
           </Form.Group>
+          <Modal.Footer>
+            <Button variant="light" type="submit">
+              Save
+            </Button>
+          </Modal.Footer>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="light" onClick={handleSubmit} type="submit">
-          Save
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 };

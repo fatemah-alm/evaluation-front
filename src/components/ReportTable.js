@@ -2,52 +2,108 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import { observer } from "mobx-react";
 const ReportTable = ({ project, teamId }) => {
-  console.log(teamId, "TEAM");
-  let length = project.judge.length;
+  let length = project.judge ? project.judge.length : 0;
   let avgScorePerTeam = 0;
+  let total = 0;
+
   const handleCriteria = (criteriaId) => {
-    console.log(criteriaId, "ID");
+    avgScorePerTeam = 0;
+    // total = 0;
+
     project.judge.map((judge) =>
       judge.grade.map((team) => {
-        if (+team.id === +teamId)
+        if (+team.id === +teamId || teamId == 0)
           team.grade.map((criteria) => {
             if (+criteria.id === +criteriaId) {
-              console.log("teeest");
               return (avgScorePerTeam += criteria.grade);
             }
           });
       })
     );
 
-    console.log(avgScorePerTeam);
+    total += avgScorePerTeam;
   };
-
   return (
-    <Table striped bordered hover style={{ width: "80%", textAlign: "center" }}>
-      <thead>
-        <tr>
-          <th>Criteria</th>
-          <th>Avg. Score</th>
-          <th>Weight</th>
-          <th>Weighted Avg.</th>
-        </tr>
-      </thead>
-      <tbody>
-        {project.criterias.map((criteria) => {
-          handleCriteria(criteria.id);
-          return (
+    <>
+      <div className="report">
+        <Table
+          striped
+          bordered
+          hover
+          style={{ width: "80%", textAlign: "center" }}
+        >
+          <thead>
             <tr>
-              <th scope="row">{criteria.name}</th>
-              <td>{(avgScorePerTeam / length) * 10}%</td>
-              <td>{criteria.weight}</td>
-              <td>
-                {((avgScorePerTeam / length) * 0.1 * criteria.weight) / 100}
-              </td>
+              <th>Criteria</th>
+              <th>Avg. Score</th>
+              <th>Weight</th>
+              <th>Weighted Avg.</th>
             </tr>
-          );
-        })}
-      </tbody>
-    </Table>
+          </thead>
+          <tbody>
+            {project.criterias &&
+              project.criterias.map((criteria) => {
+                handleCriteria(criteria.id);
+                return (
+                  <tr key={criteria.id}>
+                    <th scope="row">{criteria.name}</th>
+                    <td>
+                      {teamId == 0
+                        ? Math.round(
+                            (((avgScorePerTeam / length) * 10) /
+                              project.teams.length) *
+                              100
+                          ) / 100
+                        : Math.round((avgScorePerTeam / length) * 10 * 100) /
+                          100}
+                      %
+                    </td>
+                    <td>{criteria.weight}</td>
+                    <td>
+                      {teamId == 0
+                        ? Math.round(
+                            (((avgScorePerTeam / length) *
+                              10 *
+                              criteria.weight) /
+                              100 /
+                              project.teams.length) *
+                              100
+                          ) / 100
+                        : Math.round(
+                            (((avgScorePerTeam / length) *
+                              10 *
+                              criteria.weight) /
+                              100) *
+                              100
+                          ) / 100}
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </Table>
+      </div>
+      <div className="total">
+        <h5>
+          Total:{" "}
+          {project.criterias && project.teams
+            ? teamId == 0
+              ? Math.round(
+                  (((total / project.judge.length) * 10) /
+                    project.criterias.length /
+                    project.teams.length) *
+                    100
+                ) / 100
+              : Math.round(
+                  (((total / project.judge.length) * 10) /
+                    project.criterias.length) *
+                    100
+                ) / 100
+            : ""}
+          %
+        </h5>
+      </div>
+    </>
   );
 };
 

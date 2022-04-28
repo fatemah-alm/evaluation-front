@@ -23,7 +23,7 @@ const SemesterList = () => {
   };
 
   const semesters = semesterStore.semesters.map((semester) => (
-    <>
+    <div key={semester.id}>
       <Accordion.Item eventKey={`${semester.id}`} key={semester.id}>
         <Accordion.Header>
           <h6>{semester.name}</h6>
@@ -71,10 +71,9 @@ const SemesterList = () => {
           )}
         </Accordion.Body>
       </Accordion.Item>
-    </>
+    </div>
   ));
 
-  console.log(semesters, ".>>>");
   return (
     <>
       <Accordion defaultActiveKey="0">
