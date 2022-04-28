@@ -9,8 +9,10 @@ import Home from "./components/Home";
 import Report from "./components/Report";
 import JudgeScreen from "./components/JudgeScreen";
 import TeamsPage from "./components/TeamsPage";
+import evaluationStore from "./stores/evaluationStore";
 
 function App() {
+  evaluationStore.showNavBar(true);
   return (
     <div className="App">
       <NavBar />

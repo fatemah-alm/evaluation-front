@@ -8,7 +8,9 @@ import judgeStore from "../stores/judgeStore";
 import { Accordion } from "react-bootstrap";
 import { Slider } from "@mui/material";
 import { AiOutlineFileDone } from "react-icons/ai";
+import evaluationStore from "../stores/evaluationStore";
 const TeamsPage = () => {
+  evaluationStore.showNavBar(false);
   const { projectId, evaluationId, judgeId } = useParams();
   const [done, setDone] = useState(false);
   const project = projectStore.projects.find((project) => {
@@ -92,6 +94,15 @@ const TeamsPage = () => {
                             </div>
                           </div>
                         ))}
+
+                        <h5 style={{ textAlign: "center" }}>Note:</h5>
+                        <textarea
+                          style={{ width: "100%", borderRadius: "12px" }}
+                          onChange={(e) => {
+                            grade.note = e.target.value;
+                          }}
+                          placeholder="Enter your notes here..."
+                        />
                       </Accordion.Body>
                     </Accordion.Item>
                   </div>
