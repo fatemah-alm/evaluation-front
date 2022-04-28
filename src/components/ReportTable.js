@@ -5,7 +5,7 @@ const ReportTable = ({ project, teamId }) => {
   let length = project.judge ? project.judge.length : 0;
   let avgScorePerTeam = 0;
   let total = 0;
-
+  let notes = [];
   const handleCriteria = (criteriaId) => {
     avgScorePerTeam = 0;
     // total = 0;
@@ -23,6 +23,29 @@ const ReportTable = ({ project, teamId }) => {
 
     total += avgScorePerTeam;
   };
+
+  project.judge &&
+    project.judge.forEach((judge) =>
+      judge.grade.forEach((team) => {
+        +teamId != 0 &&
+          notes.push({
+            note: team.note,
+            judge: judge.name,
+            id: judge.id,
+            noteIteamId: team.id,
+          });
+      })
+    );
+  const noteList = notes.map(
+    (note) =>
+      note.noteIteamId === +teamId && (
+        <div key={"notes" + note.id}>
+          <h6>{note.judge}</h6>
+          <p style={{ paddingLeft: "30px" }}>{note.note}</p>
+          <hr />
+        </div>
+      )
+  );
   return (
     <>
       <div className="report">
@@ -103,6 +126,20 @@ const ReportTable = ({ project, teamId }) => {
           %
         </h5>
       </div>
+      {notes.length !== 0 && (
+        <div
+          style={{
+            border: "1px soild",
+            borderRadius: "12px",
+            padding: "3%",
+            backgroundColor: "white",
+          }}
+        >
+          <h4 style={{ textAlign: "start" }}>Notes:</h4>
+          {noteList}
+          {/* <h6> </h6> */}
+        </div>
+      )}
     </>
   );
 };

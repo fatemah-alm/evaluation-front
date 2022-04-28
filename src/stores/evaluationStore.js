@@ -3,10 +3,14 @@ import { instance } from "./instance";
 
 class EvaluationStore {
   evaluation = [];
-
+  showNav = true;
   constructor() {
     makeAutoObservable(this);
   }
+
+  showNavBar = (value) => {
+    this.showNav = value;
+  };
 
   fetchEvaluation = async () => {
     try {

@@ -6,7 +6,9 @@ import semesterStore from "../stores/semesterStore";
 import { Button } from "react-bootstrap";
 import judgeStore from "../stores/judgeStore";
 import { useNavigate } from "react-router-dom";
+import evaluationStore from "../stores/evaluationStore";
 const JudgeScreen = () => {
+  evaluationStore.showNavBar(false);
   const { projectId, evaluationId } = useParams();
   const navigate = useNavigate();
   const [input, setInput] = useState({ name: "", project: projectId });

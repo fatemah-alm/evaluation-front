@@ -73,7 +73,7 @@ const ProjectAddModal = ({ show, handleClose, semesterId }) => {
               <div style={{ width: "60%" }}>
                 {/* here */}
                 <DropdownMultiselect
-                  options={criteriasIs}
+                  options={[...criteriasIs]}
                   name="Criteria"
                   handleOnChange={handleSelect}
                 />
