@@ -21,7 +21,8 @@ class CriteriaStore {
     try {
       const response = await instance.post("/criterias/", newCriteria);
       this.criterias.push(response.data);
-      await this.fetchCriterias();
+      // await this.fetchCriterias();
+      console.log(this.criterias);
     } catch (error) {
       console.log(error);
     }

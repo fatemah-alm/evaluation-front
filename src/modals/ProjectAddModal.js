@@ -37,6 +37,14 @@ const ProjectAddModal = ({ show, handleClose, semesterId }) => {
     projectStore.addProject(project);
     handleClose();
   };
+
+  const criteriasIs = criteriaStore.criterias.map((criteria) => {
+    return {
+      key: criteria.id,
+      label: criteria.name + " - " + criteria.weight,
+    };
+  });
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Body>
@@ -63,13 +71,9 @@ const ProjectAddModal = ({ show, handleClose, semesterId }) => {
               style={{ width: "100%", display: "flex", alignItems: "center" }}
             >
               <div style={{ width: "60%" }}>
+                {/* here */}
                 <DropdownMultiselect
-                  options={criteriaStore.criterias.map((criteria) => {
-                    return {
-                      key: criteria.id,
-                      label: criteria.name + " - " + criteria.weight,
-                    };
-                  })}
+                  options={criteriasIs}
                   name="Criteria"
                   handleOnChange={handleSelect}
                 />
@@ -81,13 +85,14 @@ const ProjectAddModal = ({ show, handleClose, semesterId }) => {
               />
             </div>
           </Form.Group>
+          <Modal.Footer>
+            <Button variant="light" type="submit">
+              Save
+            </Button>
+          </Modal.Footer>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="light" onClick={handleSubmit} type="submit">
-          Save
-        </Button>
-      </Modal.Footer>
+
       <CriteriaAddModal show={show1} handleClose={handleClose1} />
     </Modal>
   );

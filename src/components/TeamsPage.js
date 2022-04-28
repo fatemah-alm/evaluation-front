@@ -22,7 +22,6 @@ const TeamsPage = () => {
   }) ?? { name: "", project: "" };
   const handleChange = (event, criteria, grade) => {
     criteria.grade = event.target.value;
-    console.log(criteria.grade, "THIS");
     grade.grade.map((criteria1) => {
       if (+criteria1.id === +criteria.id)
         return (criteria1.grade = event.target.value);
@@ -36,7 +35,11 @@ const TeamsPage = () => {
     judgeStore.updateJudge(judgeId, judge);
     setDone(true);
   };
-  return (
+  return project.isLocked ? (
+    <div className="locked">
+      <h4>This Project Is Locked!</h4>
+    </div>
+  ) : (
     <div className="home-page report-page">
       <div className="report-page-header">
         <h2>{project.name}</h2>
@@ -59,39 +62,40 @@ const TeamsPage = () => {
           <div className="teams-page">
             <h5>Teams</h5>
             <Accordion defaultActiveKey="0">
-              {judge.grade.map((grade) => (
-                <>
-                  <Accordion.Item eventKey={`${grade.id}`}>
-                    <Accordion.Header>
-                      <h6>{grade.name}</h6>
-                    </Accordion.Header>
-                    <Accordion.Body>
-                      {grade.grade.map((criteria) => (
-                        <div className="criterion">
-                          <p>{criteria.name}</p>
-                          <div className="slider">
-                            <p>0</p>
-                            <Slider
-                              aria-label="Temperature"
-                              defaultValue={0}
-                              //   getAriaValueText={valuetext}
-                              valueLabelDisplay="auto"
-                              onChange={(event) =>
-                                handleChange(event, criteria, grade)
-                              }
-                              step={0.5}
-                              marks
-                              min={0}
-                              max={10}
-                            />
-                            <p>10</p>
+              {judge.grade &&
+                judge.grade.map((grade) => (
+                  <div key={grade.id}>
+                    <Accordion.Item eventKey={`${grade.id}`}>
+                      <Accordion.Header>
+                        <h6>{grade.name}</h6>
+                      </Accordion.Header>
+                      <Accordion.Body>
+                        {grade.grade.map((criteria) => (
+                          <div className="criterion" key={criteria.id}>
+                            <p>{criteria.name}</p>
+                            <div className="slider">
+                              <p>0</p>
+                              <Slider
+                                aria-label="Temperature"
+                                defaultValue={0}
+                                //   getAriaValueText={valuetext}
+                                valueLabelDisplay="auto"
+                                onChange={(event) =>
+                                  handleChange(event, criteria, grade)
+                                }
+                                step={0.5}
+                                marks
+                                min={0}
+                                max={10}
+                              />
+                              <p>10</p>
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </Accordion.Body>
-                  </Accordion.Item>
-                </>
-              ))}
+                        ))}
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </div>
+                ))}
             </Accordion>
             <div className="btn-done">
               <Button variant="light" onClick={handleSubmit}>

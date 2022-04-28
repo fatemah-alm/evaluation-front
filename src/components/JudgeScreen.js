@@ -19,7 +19,8 @@ const JudgeScreen = () => {
   const handleChange = (event) => {
     setInput({ ...input, [event.target.name]: event.target.value });
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const judge = await judgeStore.createJudge(input);
     navigate(`/teams/${projectId}/${evaluationId}/${judge.id}`);
   };
@@ -35,7 +36,7 @@ const JudgeScreen = () => {
         </div>
       ) : (
         <>
-          <form className="input-judge">
+          <form className="input-judge" onSubmit={(e) => handleSubmit(e)}>
             <label>
               Judge Name:
               <input
